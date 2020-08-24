@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BTCMessage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <script href="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.js" type="text/javascript"></script>
+
+    <!-- Primary Meta Tags -->
+<title>BTCMessage - Send any Bitcoin address a message</title>
+<meta name="title" content="BTCMessage - Send any Bitcoin address a message">
+<meta name="description" content="Send a message to any Bitcoin address, easily visible in any block explorer.
+Each message line is displayed via an artificial vanity Bitcoin address.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://btcmessage.com">
+<meta property="og:title" content="BTCMessage - Send any Bitcoin address a message">
+<meta property="og:description" content="Send a message to any Bitcoin address, easily visible in any block explorer.
+Each message line is displayed via an artificial vanity Bitcoin address.">
+<meta property="og:image" content="/header.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://btcmessage.com">
+<meta property="twitter:title" content="BTCMessage - Send any Bitcoin address a message">
+<meta property="twitter:description" content="Send a message to any Bitcoin address, easily visible in any block explorer.
+Each message line is displayed via an artificial vanity Bitcoin address.">
+<meta property="twitter:image" content="/header.png">
+
+
+  </head>
+
+    <!-- <body onload="fetchIssues()"> -->
+    <body>
+    <div class="container">
+      <h1><b>BTC</b>Message<small> Send a message to <b>any</b> Bitcoin address.</small></h1>
+
+      <div class="jumbotron" id="masterFormID">
+
+        <div class="row" style="display: table; overflow: hidden;">
+          <div class="col-xs-6">
+            <div style="margin-top:8%">
+              <h3>Send a message to <b>any</b> Bitcoin address, <a href="https://www.blockchain.com/btc/tx/8f3b010bc5975db611cf2e75acdbd1a750d068a7291b199c96b192719db0cb28" target="_blank">easily visible</a> in <b>any</b> block explorer.</h4>
+              <h3>Copy paste the outputs into your favourite wallet such as <a href="https://electrum.org/#home" target="_blank">Electrum</a> and send the transaction.</h4>
+            </div>
+            <!-- <h4>The message will be easily visible in any block explorer for the recipient.</h4> -->
+            <!-- <h4>Each message line is displayed via artificial vanity Bitcoin addresses, which no-one holds the keys to these addresses and hence the small message outputs are essentially burnt.</h4> -->
+          </div>
+          <div class="col-xs-6">
+            <h5>What it looks like:</h5>
+            <img src="demo.png" width="100%" style="margin-bottom: 5px; border: 2px solid #555">
+          </div>
+        </div>
+
+        <h5>Each message line is displayed via an <a href="https://nicholasfarrow.com/Fake-Bitcoin-Vanity-Addresses/" target="_blank">artificial vanity Bitcoin address</a> which no-one holds the keys to. Hence the small BTC outputs for the message are essentially burnt.</h5>
+
+        <div class="form-group">
+          <label for="recipient">Recipient Address:</label>
+          <input type="text" class="form-control" id="recipient" aria-describedby="recipientHelp" placeholder="Recipient Bitcoin Address">
+          <small id="recipientHelp" class="form-text text-muted">Send a message to this Bitcoin address.</small>
+        </div>
+
+        <form id="messageForm">
+	        <div class="form-group">
+            <label for="messageInput">Message:</label>
+	          <textarea class="form-control" rows="5" id="messageInput" placeholder="Enter the message you wish to send"></textarea>
+            <small>Letters 0/I/O/l characters are replaced with o/i/o/L.</small>
+          </div>
+        </form>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6">
+              <label for="paddingCharacter">Padding Character:</label>
+              <input type="text" class="form-control" id="paddingCharacter" value="7">
+              <small id="phraseLengthHelp" class="form-text text-muted">Character that will be used to pad each address.</small>
+            </div>
+
+            <div class="col-xs-6">
+              <label for="phraseLength">Characters grouping size:</label>
+              <select class="form-control" id="phraseLength">
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option selected>24</option>
+                <option>25</option>
+              </select>
+              <small id="phraseLengthHelp" class="form-text text-muted">Max number of characters that will be grouped into an address.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="additionalSend">Additional Send Amount</label>
+          <input min="0.0000543" step="0.00005" type="number" class="form-control" id="additionalSend" aria-describedby="additionalSendHelp" value="0.0000543">
+          <small id="additionalSendHelp" class="form-text text-muted">Bitcoin to send along with the message, the default (0.0000543) is the minimum amount for a Bitcoin output.</small>
+        </div>
+
+
+        <!-- <div>
+          <label class="checkbox-inline"><input type="checkbox" id='donationCheckBox' checked>Use "JustReadAll" Header & Small Donation</label>
+        </div> -->
+
+        <form>
+            <fieldset id="headerToggle">
+              <div class="form-check">
+                <input type="radio" id="donateHeader" checked="checked" name="radio">
+                <label id="donateHeaderLabel" for="donateHeader">Use "1BTCmsg" header</label>
+              </div>
+
+              <div class="form-check">
+                <input type="radio" id="noHeader" name="radio">
+                <label id="noHeaderLabel" for="noHeader">Don't use header address</label>
+              </div>
+            </fieldset>
+
+          <div class="form-group" id="donationSlider">
+            <small id="donationLabel">Included donation to site: 0.0000543 BTC</small>
+            <span id='donationDisplay'></span>
+            <!-- <input type="text" id="donationDisplay" value=""> -->
+            <!-- <input type="range" min="0.0000543" max="0.01" class="form-control-range" id="donationSliderValue" onchange="updateTextInput(this.value);"> -->
+            <input type="range" min="0.0000543" max="0.01" step="0.00005" class="form-control-range" id="donationSliderValue" onchange="updateTextInput(this.value);" value="0.0000543">
+            <small id="donationHelp" class="form-text text-muted">The header adds a recognizable "1BTCmsg...." address to make the measage more noticable.</small>
+
+          </div>
+        </form>
+
+        <!-- <label>Your input: </label> -->
+        <!-- <p><span id='outputs'></span></p> -->
+
+        <form id="outputsForm">
+          <div class="form-group">
+            <label for="outputs">Transaction Outputs:</label>
+            <textarea class="form-control" rows="5" id="outputs" placeholder="Message Transactions" readonly></textarea>
+          </div>
+        </form>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <small>Total Amount: <span id='totalAmount'>0</span> BTC</small>
+          <!-- </br> -->
+          </div>
+        <!-- </br -->
+          <div class="col-xs-6">
+            <button onclick="copy()" style="float: right;">Copy</button>
+          </div>
+          </div>
+
+          <div>
+          <small>Note: Some wallets <a href="https://bitcointalk.org/index.php?topic=5081904.0" target="_blank">randomise the order of outputs</a>, hence the lines may be shuffled.</small>
+          </br>
+            <small><b>Always</b> manually double-check the addresses and amounts before sending.</small>
+          </div>
+
+
+        </div>
+
+      <div class="footer">
+        <small>&copy <a href="https://nicholasfarrow.com" target="_blank">nicholasfarrow.com</a></small>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="base58_2.js"></script>
+  </body>
+</html>
