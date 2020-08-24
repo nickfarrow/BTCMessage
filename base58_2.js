@@ -300,7 +300,8 @@ function main() {
     for (i=0; i<outputs.length; i++) {
       console.log(outputs[i]);
       totalAmount = totalAmount + outputs[i][1];
-      printText = printText + outputs[i][0] + ", " + outputs[i][1].toString().slice(0, 10) + "\n";
+      var strNum = outputs[i][1].toFixed(8);
+      printText = printText + outputs[i][0] + ", " + strNum + "\n";
       console.log(printText);
       console.log(totalAmount);
     }
@@ -314,7 +315,7 @@ function main() {
   // var totalAmount = parseFloat(additionalSend) + coreOutputs.split("\n").length * minSend + parseFloat(donationAmount);
 
   document.getElementById('outputs').innerHTML = printText;
-  document.getElementById('totalAmount').innerHTML = totalAmount.toString().slice(0, 10);
+  document.getElementById('totalAmount').innerHTML = totalAmount;
     // parseMessage(document.getElementById("messageInput").value);
     // parseMessage("1SendNickBitcoin111111111111111111");
 }
