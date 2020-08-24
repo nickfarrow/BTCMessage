@@ -3,7 +3,7 @@
 // Minimum send defined by protocol
 // https://bitcoinmagazine.com/articles/bitcoin-developers-adding-0-007-minimum-transaction-output-size-1367825159
 const minSend = 0.0000543
-
+const satoshi = 0.00000001
 // const sjcl = window.sjcl;
 // Overview
 //
@@ -248,16 +248,15 @@ function convertToAddress(phrase, paddingChar) {
 
 function parseMessage(message) {
   var messageStr = message;
-
   var groupedWords = groupWords(cleanInput(messageStr), document.getElementById("phraseLength").value);
 
   var addresses = [];
   for (i=0; i<groupedWords.length; i++) {
-    addresses.push(convertToAddress(groupedWords[i], document.getElementById("paddingCharacter").value));
+    addresses.push([convertToAddress(groupedWords[i], document.getElementById("paddingCharacter").value), minSend + (1+i)*satoshi]);
   }
 
-  var sendAmount = minSend.toString()
-  return addresses.join(", " + sendAmount + "\n") + ", " + sendAmount;
+  // return addresses.join(", " + sendAmount + "\n") + ", " + sendAmount;
+  return addresses
 }
 
 
@@ -269,34 +268,53 @@ function parseMessage(message) {
 function main() {
   var recipient = document.getElementById("recipient").value;
   var coreOutputs = parseMessage(document.getElementById("messageInput").value);
-  var additionalSend = document.getElementById("additionalSend").value;
+  var additionalSend = parseFloat(document.getElementById("additionalSend").value);
   var donationAddress = "1BTCmsgNzdcttzGLrcwz3BSNEtZdsfJ1E8";
 
-  var outputs = "";
+  var outputs = [];
 
   if ($('#donateHeader').prop('checked')) {
-    var donationAmount = document.getElementById("donationSliderValue").value;
-    outputs = outputs + donationAddress + ", " + donationAmount + "\n"
+    // var donationAmount = document.getElementById("donationSliderValue").value;
+    outputs.push([donationAddress, minSend]);
   }
   else {
     var donationAmount = 0;
   }
 
+  outputs = outputs.concat(coreOutputs)
+
   // if (recipient != "" && coreOutputs != "") {
   if (recipient != "") {
     // var outputs = outputs + coreOutputs  + "</br>"
     //   + recipient + ", " + additionalSend + "</br>";
-    var outputs = outputs + coreOutputs  + "\n"
-      + recipient + ", " + additionalSend + "\n";
+
+    var minAdditionalSend = minSend + (outputs.length * satoshi);
+    if (additionalSend < minAdditionalSend) {
+      additionalSend = minAdditionalSend;
+    }
+
+    outputs.push([recipient, additionalSend]);
+
+    var totalAmount = 0;
+    var printText = "";
+    for (i=0; i<outputs.length; i++) {
+      console.log(outputs[i]);
+      totalAmount = totalAmount + outputs[i][1];
+      printText = printText + outputs[i][0] + ", " + outputs[i][1].toString().slice(0, 10) + "\n";
+      console.log(printText);
+      console.log(totalAmount);
+    }
   }
   else {
-    outputs = "Please enter a recipient address.";
+    printText = "Please enter a recipient address.";
+    totalAmount = 0;
   }
 
-  var totalAmount = parseFloat(additionalSend) + coreOutputs.split("\n").length * minSend + parseFloat(donationAmount);
 
-  document.getElementById('outputs').innerHTML = outputs;
-  document.getElementById('totalAmount').innerHTML = totalAmount.toFixed(7);
+  // var totalAmount = parseFloat(additionalSend) + coreOutputs.split("\n").length * minSend + parseFloat(donationAmount);
+
+  document.getElementById('outputs').innerHTML = printText;
+  document.getElementById('totalAmount').innerHTML = totalAmount.toString().slice(0, 10);
     // parseMessage(document.getElementById("messageInput").value);
     // parseMessage("1SendNickBitcoin111111111111111111");
 }
@@ -304,7 +322,7 @@ function main() {
 
 
 function updateTextInput(val) {
-          document.getElementById('donationLabel').innerHTML="Included donation to site: " + val + " BTC"
+          document.getElementById('donationLabel').innerHTML="Included donation to site: " + val + " BTC";
 }
 
 
