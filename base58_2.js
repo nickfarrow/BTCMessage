@@ -4,7 +4,7 @@
 // https://bitcoinmagazine.com/articles/bitcoin-developers-adding-0-007-minimum-transaction-output-size-1367825159
 const minSend = 0.0000543
 const satoshi = 0.00000001
-// const sjcl = window.sjcl;
+
 // Overview
 //
 // Message of words: Thanks for the great content
@@ -25,21 +25,8 @@ const satoshi = 0.00000001
 
 
 
-//
-// function base58_decode(base58) {
-//   var charstr = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-//   var chars = charstr.split('');
-//
-//   var total = 0;
-//   base58 = base58.reverse();
-//
-//   for (i=0; i<base58.length; i++) {
-//     var char_index = chars.findIndex(base58[i]);
-//     total = total + char_index * (58**i);
-//   }
-// }
 
-
+///////////////////////////////////////////////////////////////////// Utils
 
 // https://gist.github.com/diafygi/90a3e80ca1c2793220e5/#file-annotated-js-L1
 var to_b58 = function(
@@ -132,7 +119,6 @@ function toBits(bytes) {
   return out;
 }
 
-
 function fromBits(arr) {
     var out = [], bl = sjcl.bitArray.bitLength(arr), i, tmp;
     for (i=0; i<bl/8; i++) {
@@ -145,22 +131,14 @@ function fromBits(arr) {
     return out;
 }
 
-// Overview
-//
-// Message of words: Thanks for the great content
-// convert to camel case: Thanks For The Great Content
-// Group words into addresses [x chars per address]
-// [Thanks For, The Great. Content]
-// remove spaces: [ThanksFor, TheGreat, Content]
-// Loop through each phrase:
-//    '1' + ThanksFor + '77777777777777'  ( or another padding char )
-//    Convert this base58 back into bytes
-//    Recalculate the checksum from the first 21 bytes, overwrite the last 4 bytes.
-//    Convert back into base58
-// Print each "Address, amount" where amount is the minimum required for the tx
-// Print the "RecipientAddress, SendAmount" where Sent Amount is chosen by the user
-// Print the vanity address bc1JustReadAll6666qdqwdgd1eic with an optional donation amount
-// This could also be printed at the top
+
+
+
+
+
+
+
+
 
 function cleanInput(message) {
   console.log("\n\nCleaning input:")
@@ -178,7 +156,6 @@ function cleanInput(message) {
   console.log(message);
   return message;
 }
-
 
 
 function groupWords(message, maxLen) {
@@ -206,7 +183,6 @@ function groupWords(message, maxLen) {
   console.log(groupedWordsList);
   return groupedWordsList;
 }
-
 
 
 function recalcChecksum(address) {

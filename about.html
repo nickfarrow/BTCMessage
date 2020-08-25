@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BTCMessage - Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139357903-5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-139357903-5');
+    </script>
+
+
+    <!-- Primary Meta Tags -->
+  <meta name="title" content="BTCMessage - Send any Bitcoin address a message">
+  <meta name="description" content="Send a message to any Bitcoin address, easily visible in any block explorer.
+  Each message line is displayed via an artificial vanity Bitcoin address.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://btcmessage.com">
+  <meta property="og:title" content="BTCMessage - Send any Bitcoin address a message">
+  <meta property="og:description" content="Send a message to any Bitcoin address, easily visible in any block explorer.
+  Each message line is displayed via an artificial vanity Bitcoin address.">
+  <meta property="og:image" content="https://btcmessage.com/header.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://btcmessage.com">
+  <meta property="twitter:title" content="BTCMessage - Send any Bitcoin address a message">
+  <meta property="twitter:description" content="Send a message to any Bitcoin address, easily visible in any block explorer.
+  Each message line is displayed via an artificial vanity Bitcoin address.">
+  <meta property="twitter:image" content="https://btcmessage.com/header.png">
+
+  </head>
+
+    <!-- <body onload="fetchIssues()"> -->
+    <body>
+    <div class="container">
+      <h1><a href="https://btcmessage.com/" style="text-decoration:none; color:black;"><b>BTC</b>Message<small></a> Demo</small></h1>
+
+      <div class="jumbotron" id="masterFormID">
+        <h3>How it works</h3>
+
+        <h4>Creating such long vanity addresses legitimately is basically impossible. </br>Instead we can forge one.
+        </h4>
+
+        <h4>Bitcoin addresses are only valid if they have a valid checksum, meaning that it's highly likely any selected 34 characters will not be a valid address. To forge an address we instead:
+        </h4>
+
+        <ol>
+          <li>Decide upon the text we wish to include in our address.</li>
+          <li>Pad the address up to 33 characters.</li>
+          <li>Convert this base58 address back into bytes.</li>
+          <li>Recalculate the checksum from the first 21 bytes, and use it to overwrite the last. 4 bytes.</li>
+          <li>Converte the address bytes back to base58 format.</li>
+        </ol>
+
+        <h4>The checksum uses the first 21 bytes of the address, hashes it twice with SHA256 and then takes the first 4 bytes of this hash; which will comprise the last 4 bytes of our address.
+        </h4>
+
+        <h4>For a <a href="https://nicholasfarrow.com/Fake-Bitcoin-Vanity-Addresses/" target="_blank">full tutorial please see my website</a> where I discuss how this was done someone who messaged the 2020 Twitter hacker.</h4>
+
+        <h3>BIP0069</h3>
+        <h4>Before 2015, there was no standard for how inputs outputs of Bitcoin transactions should be ordered. As a result, wallets could often have discenable fingerprints based on how they composed transactions.
+
+        <br><br>
+
+        <a href="https://en.bitcoin.it/wiki/BIP_0069" target="_blank">BIP0069</a> introduced a standard for ordering where outputs are first ordered by amount, and then secondly by the `scriptPubKeys` byte arrays.
+
+        <br><br>
+
+        We use this to our advantage to order our message, by using ascending output amounts our message will display in the correct order.
+        </h4>
+
+        <h3>Feedback</h3>
+        <h4>This is my first javascript based web application and is a work in progress. I would love feedback on anything from site design, to feature requests. Please <a href="mailto:nick@nicholasfarrow.com" target="_blank">email me</a> at nick@nicholasfarrow.com.
+        </h4>
+        
+      </div>
+
+    <div class="footer">
+        <small>&copy <a href="https://nicholasfarrow.com" target="_blank">nicholasfarrow.com</a></small>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://chancejs.com/chance.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="base58_2.js"></script>
+  </body>
+</html>
