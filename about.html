@@ -49,9 +49,41 @@
           <iframe width="560" height="315" src="https://www.youtube.com/embed/FxDSsH5nrB0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </center>
 
-        <h3>How it works</h3>
+        <h3><b>Purpose</b></h3>
+        <h4>
+          Previously it has been difficult to send an unsolicited message to a Bitcoin address, where a communication channel is yet to be established
+          (see
+              <a href="https://bitcoin.stackexchange.com/questions/19893/how-to-send-bitcoin-with-a-message-attached" target="_blank">[1]</a>,
+              <a href="https://www.quora.com/How-can-I-contact-a-Bitcoin-address" target="_blank">[2]</a>,
+              <a href="https://www.reddit.com/r/Bitcoin/comments/85jj4k/btc_transaction_as_a_text_message/" target="_blank">[3]</a>,
+              <a href="https://www.reddit.com/r/btc/comments/49pp3n/eli5_how_to_embed_text_into_a_bitcoin_transaction/" target="_blank">[4]</a>,
+              <a href="https://bitcointalk.org/index.php?topic=1275775.0" target="_blank">[5]</a>).
 
-        <h4>Creating such long vanity addresses legitimately is basically impossible. </br>Instead we can forge one.
+          Furthermore, no existing solution results in a message which is reasonably noticable to an unexpecting recipient.
+
+          <br><br>
+
+          Messages using the BTCMessage tool are <b>expensive & public</b>, and therefore not effective means of communication. But they may be desired under certain circumstances:
+        </h4>
+        <ul>
+          <li>To attempt to contact the mistaken recipient of an <a href="https://bitcoin.stackexchange.com/questions/50083/how-do-i-recover-bitcoin-sent-to-a-wrong-wallet-address" target="_blank">accidental transaction</a>.</li>
+          <li>To give someone <a href="https://www.blockchain.com/btc/tx/54215bf9b24db3dbf3463f305128caa0c6ac5be8fd6e7d5d534f494855fd1689" target="_blank">advice.</a></li>
+          <li>Leaving a small message along with a donation.</li>
+        </ul>
+
+        <h4>
+          These messages are <b>not</b> for common use as the message is comprised of unspendable transaction outputs (UTXO) which could theoretically bloat the blockchain size.
+
+          <br><br>
+          Personally I see no harm in the ocassional message. With currently over 65,000,000 unspent UTXOs, a few messages will have little impact. Though if these messages do become cumbersome in the future I will likely be against their use unless necessary.
+        </h4>
+
+
+
+
+        <h3><b>How it works</b></h3>
+
+        <h4>Creating such long vanity addresses legitimately is essentially impossible. </br>Instead we can forge one.
         </h4>
 
         <h4>Bitcoin addresses are only valid if they have a valid checksum, meaning that it's highly likely any selected 34 characters will not be a valid address. To forge an address we instead:
@@ -70,13 +102,13 @@
 
         <h4>For a <a href="https://nicholasfarrow.com/Fake-Bitcoin-Vanity-Addresses/" target="_blank">full tutorial please see my website</a> where I discuss how this was done someone who messaged the 2020 Twitter hacker.</h4>
 
-        <h3>1BTCmsg Header</h3>
+        <h3><b>1BTCmsg Header</b></h3>
         <h4>This is an optional message header which identifies the transaction as a message, I own this address so might get a few cents from each message.
           <br><br>
           I am currently searching for a vanity address "1BTCMessage...", which for a case insensitive match will take ~70 days on my GTX 970. I'm using shorter ones until I find a match, or a better solution.
         </h4>
 
-        <h3>BIP0069</h3>
+        <h3><b>BIP0069</b></h3>
         <h4>Before 2015, there was no standard for how inputs outputs of Bitcoin transactions should be ordered. As a result, wallets could often have discenable fingerprints based on how they composed transactions.
 
         <br><br>
@@ -88,7 +120,7 @@
         We use this to our advantage to order our message, by using ascending output amounts our message will display in the correct order.
         </h4>
 
-        <h3>Feedback</h3>
+        <h3><b>Feedback</b></h3>
         <h4>This is my first javascript based web application and is a work in progress. I would love feedback on anything from site design, to feature requests. Please <a href="mailto:nick@nicholasfarrow.com" target="_blank">email me</a> at nick@nicholasfarrow.com.
         </h4>
         <h3>Donate: bc1qjxnk5skkjf3t7zcv7jclse2sacvewrs5aucetc</h3>
