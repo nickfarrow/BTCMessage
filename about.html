@@ -51,7 +51,7 @@
 
         <h3><b>Purpose</b></h3>
         <h4>
-          Previously it has been difficult to send an unsolicited message to a Bitcoin address, where a communication channel is yet to be established
+          It is difficult to send an unsolicited message to a Bitcoin address, where a communication channel is yet to be established
           (see
               <a href="https://bitcoin.stackexchange.com/questions/19893/how-to-send-bitcoin-with-a-message-attached" target="_blank">[1]</a>,
               <a href="https://www.quora.com/How-can-I-contact-a-Bitcoin-address" target="_blank">[2]</a>,
@@ -59,23 +59,27 @@
               <a href="https://www.reddit.com/r/btc/comments/49pp3n/eli5_how_to_embed_text_into_a_bitcoin_transaction/" target="_blank">[4]</a>,
               <a href="https://bitcointalk.org/index.php?topic=1275775.0" target="_blank">[5]</a>).
 
-          Furthermore, no existing solution results in a message which is reasonably noticable to an unexpecting recipient.
+          No existing solution results in a message which is reasonably noticable to an unexpecting recipient.
 
           <br><br>
 
-          Messages using the BTCMessage tool are <b>relatively expensive & public</b>, and therefore not effective means of communication. But they may be desired under certain circumstances:
+          Messages using the BTCMessage tool are <b>relatively expensive & public</b>, and therefore are not effective means of communication. But they may be desirable in certain circumstances:
+
         </h4>
+
+        <h4>
         <ul>
           <li>To attempt to contact the mistaken recipient of an <a href="https://bitcoin.stackexchange.com/questions/50083/how-do-i-recover-bitcoin-sent-to-a-wrong-wallet-address" target="_blank">accidental transaction</a>.</li>
           <li>To give someone <a href="https://www.blockchain.com/btc/tx/54215bf9b24db3dbf3463f305128caa0c6ac5be8fd6e7d5d534f494855fd1689" target="_blank">advice.</a></li>
           <li>Leaving a small message along with a donation.</li>
         </ul>
+        </h4>
 
         <h4>
           These messages are <b>not</b> for common use as the message is comprised of unspendable transaction outputs (UTXO) which could theoretically bloat the blockchain size.
 
           <br><br>
-          Personally I see no harm in the ocassional message. With currently over 65,000,000 unspent UTXOs, a few messages will have little impact. Though if these messages do become cumbersome in the future I will likely be against their use unless necessary.
+          Though with currently over 65,000,000 unspent UTXOs, a ocassional messages will have little impact.
         </h4>
 
 
@@ -89,18 +93,21 @@
         <h4>Bitcoin addresses are only valid if they have a valid checksum, meaning that it's highly likely any selected 34 characters will not be a valid address. To forge an address we instead:
         </h4>
 
+        <h4>
         <ol>
           <li>Decide upon the text we wish to include in our address.</li>
           <li>Pad the address up to 33 characters.</li>
           <li>Convert this base58 address back into bytes.</li>
-          <li>Recalculate the checksum from the first 21 bytes, and use it to overwrite the last. 4 bytes.</li>
-          <li>Converte the address bytes back to base58 format.</li>
+          <li>Recalculate the checksum from the first 21 bytes, and use it to overwrite the last 4 bytes.</li>
+          <li>Convert the address bytes back to base58 format.</li>
+          <li>Any other reason you wish to attempt to communicate with an address.</li>
         </ol>
+        </h4>
 
         <h4>The checksum uses the first 21 bytes of the address, hashes it twice with SHA256 and then takes the first 4 bytes of this hash; which will comprise the last 4 bytes of our address.
         </h4>
 
-        <h4>For a <a href="https://nicholasfarrow.com/Fake-Bitcoin-Vanity-Addresses/" target="_blank">full tutorial please see my website</a> where I discuss how this was done someone who messaged the 2020 Twitter hacker.</h4>
+        <h4>For a <a href="https://nicholasfarrow.com/Fake-Bitcoin-Vanity-Addresses/" target="_blank">full tutorial how to do this in C, please see my website</a>.</h4>
 
         <h3><b>1BTCmsg Header</b></h3>
         <h4>This is an optional message header which identifies the transaction as a message, I own this address so might get a few cents from each message.
@@ -121,14 +128,13 @@
         </h4>
 
         <h3><b>Feedback</b></h3>
-        <h4>This is my first javascript based web application and is a work in progress. I would love feedback on anything from site design, to feature requests. Please <a href="mailto:nick@nicholasfarrow.com" target="_blank">email me</a> at nick@nicholasfarrow.com.
+        <h4>Any to feature requests/suggestions please <a href="mailto:nick@nicholasfarrow.com" target="_blank">email me</a> at nick@nicholasfarrow.com.
         </h4>
-        <h3>Donate: bc1qjxnk5skkjf3t7zcv7jclse2sacvewrs5aucetc</h3>
-
+        <h4><a href="https://nicholasfarrow.com" target="_blank">nicholasfarrow.com</a></h4>
       </div>
 
     <div class="footer">
-        <small>&copy <a href="https://nicholasfarrow.com" target="_blank">nicholasfarrow.com</a></small>
+        <h4>Donate: bc1qjxnk5skkjf3t7zcv7jclse2sacvewrs5aucetc</h4>
       </div>
     </div>
 
