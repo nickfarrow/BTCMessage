@@ -52,19 +52,18 @@
         <h3><b>Purpose</b></h3>
         <h4>
           It is difficult to send an unsolicited message to a Bitcoin address, where a communication channel is yet to be established
-          (see
+          (e.g.
               <a href="https://bitcoin.stackexchange.com/questions/19893/how-to-send-bitcoin-with-a-message-attached" target="_blank">[1]</a>,
               <a href="https://www.quora.com/How-can-I-contact-a-Bitcoin-address" target="_blank">[2]</a>,
               <a href="https://www.reddit.com/r/Bitcoin/comments/85jj4k/btc_transaction_as_a_text_message/" target="_blank">[3]</a>,
               <a href="https://www.reddit.com/r/btc/comments/49pp3n/eli5_how_to_embed_text_into_a_bitcoin_transaction/" target="_blank">[4]</a>,
               <a href="https://bitcointalk.org/index.php?topic=1275775.0" target="_blank">[5]</a>).
 
-          No existing solution results in a message which is reasonably noticable to an unexpecting recipient.
+          No existing solution results in a message which is reasonably noticable to an unexpecting recipient. By sending a custom transaction we can enscribe a message into the blockchain which is easily noticeable in a block explorer.
 
           <br><br>
 
-          Messages using the BTCMessage tool are <b>relatively expensive & public</b>, and therefore are not effective means of communication. But they may be desirable in certain circumstances:
-
+          Messages using the BTCMessage tool are <b>relatively expensive & public</b>, and therefore are not effective means of communication. But sometimes they can be useful:
         </h4>
 
         <h4>
@@ -72,14 +71,14 @@
           <li>To attempt to contact the mistaken recipient of an <a href="https://bitcoin.stackexchange.com/questions/50083/how-do-i-recover-bitcoin-sent-to-a-wrong-wallet-address" target="_blank">accidental transaction</a>.</li>
           <li>To give someone <a href="https://www.blockchain.com/btc/tx/54215bf9b24db3dbf3463f305128caa0c6ac5be8fd6e7d5d534f494855fd1689" target="_blank">advice.</a></li>
           <li>Leaving a small message along with a donation.</li>
+	  <li>Any other reason you wish to communicate..</li>
         </ul>
         </h4>
 
+	<h3><b>Don't bloat the blockchain!!1!</b></h3>
         <h4>
-          These messages are <b>not</b> for common use as the message is comprised of unspendable transaction outputs (UTXO) which could theoretically bloat the blockchain size.
-
-          <br><br>
-          Though with currently over 65,000,000 unspent UTXOs, an ocassional messages will have little impact.
+          These messages should not be sent often, as the message's unspendable transaction outputs (UTXO) increase the blockchain size. However, with currently over 65,000,000 unspent UTXOs, including likely millions of lost private keys, and ocassional message will have little impact. Spammers already use their own tools for scams & ads via custom adresses and dusting.
+	
         </h4>
 
 
