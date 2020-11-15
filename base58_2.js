@@ -290,6 +290,7 @@ function main() {
 
   // var totalAmount = parseFloat(additionalSend) + coreOutputs.split("\n").length * minSend + parseFloat(donationAmount);
 
+  document.getElementById('phraseLengthDisp').innerHTML = document.getElementById('phraseLength').value;
   document.getElementById('outputs').innerHTML = printText;
   document.getElementById('totalAmount').innerHTML = totalAmount;
     // parseMessage(document.getElementById("messageInput").value);
