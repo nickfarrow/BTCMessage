@@ -2,7 +2,7 @@
 // nickfarrow.com
 // Minimum send defined by protocol
 // https://bitcoinmagazine.com/articles/bitcoin-developers-adding-0-007-minimum-transaction-output-size-1367825159
-const minSend = 0.0000543
+const minSend = 0.00000546
 const satoshi = 0.00000001
 
 // Overview
